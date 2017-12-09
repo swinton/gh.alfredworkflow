@@ -151,9 +151,9 @@
 		</array>
 	</dict>
 	<key>createdby</key>
-	<string></string>
+	<string>Steve Winton</string>
 	<key>description</key>
-	<string></string>
+	<string>Utilities for working with GitHub repositories</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -564,6 +564,6 @@ jq '{items: [.items[] | {uid: .url, title: .title, subtitle: ( if .state == "ope
 	<key>version</key>
 	<string>0.1.0</string>
 	<key>webaddress</key>
-	<string></string>
+	<string>https://github.com/swinton/gh.alfredworkflow</string>
 </dict>
 </plist>
