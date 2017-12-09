@@ -1,0 +1,52 @@
+#!/bin/bash
+
+set -e
+
+
+function install_brews() {
+  if [ -f "Brewfile" ] && [ "$(uname -s)" = "Darwin" ]; then
+    brew update
+
+    brew bundle check >/dev/null 2>&1 || {
+      brew bundle
+    }
+  fi
+}
+
+
+function mk_alfredworkflow() {
+  my_path="$1"
+  token="$2"
+
+  # Write files
+  dest=$(mktemp -d -t alfredworkflow)
+  cp src/icon.png src/info.plist "${dest}"
+
+  # Update info.plist with user variables
+  script/write_plist "${dest}/info.plist" "${my_path}" "${token}"
+
+  # Write zip file
+  cd "${dest}"
+  zip -r gh.alfredworkflow * >/dev/null &2>1
+
+  echo "${dest}/gh.alfredworkflow"
+}
+
+
+function main() {
+  cd $(dirname "$0")/..
+
+  install_brews
+
+  # PATH
+  my_path=/usr/bin:$( dirname $( which jq ) )
+
+  # GITHUB_TOKEN
+  echo "Enter your GitHub personal access token, followed by [ENTER]:"
+  read token
+
+  open $( mk_alfredworkflow "${my_path}" "${token}" )
+}
+
+
+main "$@"
