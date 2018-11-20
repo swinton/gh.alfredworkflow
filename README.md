@@ -15,4 +15,4 @@ script/bootstrap
 
 ## Usage
 
-...
+![alfred-workflow](https://user-images.githubusercontent.com/27806/48782173-2dfa4180-eca3-11e8-86b2-cc9b63ad315a.gif)
